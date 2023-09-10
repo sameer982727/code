@@ -1,0 +1,3 @@
+FROM openjdk:8-jdk-alpine
+COPY target/my-application.jar my-application
+ENTRYPOINT ["java","jar","/my-application.jar"]
