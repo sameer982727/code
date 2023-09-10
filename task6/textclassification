@@ -1,0 +1,31 @@
+import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.svm import LinearSVC
+from sklearn.metrics import confusion_matrix, accuracy_score
+from sklearn.pipeline import Pipeline
+import matplotlib.pyplot as plt
+df = pd.read_csv("consumer_complaints.csv")
+df = df[df["consumer_complaint_narrative"].notna()]
+df = df[df["product"].notna()]
+mapping = {
+    'Credit reporting': 0,
+    'Debt collection': 1,
+    'Consumer Loan': 2,
+    'Mortgage': 3,
+}
+df["product"] = df["product"].map(mapping)
+X_train, X_test, y_train, y_test = train_test_split(
+  df["consumer_complaint_narrative"], 
+  df["product"], 
+  random_state = 0
+)
+text_clf = Pipeline([
+    ('tfidf', TfidfVectorizer()),
+    ('clf', LinearSVC()),
+])
+text_clf.fit(X_train, y_train)
+predictions = text_clf.predict(X_test)
+print("Model accuracy: ", accuracy_score(y_test, predictions))
+print("Confusion Matrix: ", confusion_matrix(y_test, predictions))
