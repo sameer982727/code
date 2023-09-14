@@ -1,0 +1,57 @@
+swagger: '2.0'
+info:
+  title: Server API
+  version: 1.0.0
+paths:
+  /servers:
+    get:
+      summary: Gets all servers or servers by name
+      parameters:
+        - in: query
+          name: name
+          required: false
+          type: string
+      responses:
+        200:
+          description: successful operation
+          schema:
+            $ref: '#/definitions/Server'
+    put:
+      summary: Creates a new server
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/Server'
+      responses:
+        200:
+          description: successful operation
+  /servers/{id}:  # Updated path to include {id} segment
+    delete:
+      summary: Deletes a server
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        200:
+          description: server deleted
+definitions:
+  Server:
+    type: object
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      language:
+        type: string
+      framework:
+        type: string
+    required:
+      - id
+      - name
+      - language
+      - framework
