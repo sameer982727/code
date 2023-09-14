@@ -1,4 +1,4 @@
-# Java REST API for Server Management
+# Java REST API
 This is a Java API for managing server objects. It features CRUD operations and uses MongoDB for data persistence.
 
 ## Table of Contents
