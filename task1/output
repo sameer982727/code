@@ -1,0 +1,28 @@
+1.	Use PUT to create a new server:
+curl -X PUT -H "Content-Type: application/json" -d '{ "id": "123", "name": "my centos", "language": "java", "framework": "django" }' http://localhost:8080/servers
+Output:
+{ "id": "123", "name": "my centosDD", "language": "java", "framework": "django" }
+
+2.	Use GET to retrieve all servers:
+curl http://localhost:8080/servers
+Output:
+[{ "id": "123", "name": "my centos", "language": "java", "framework": "django" }]
+
+
+3.	Use GET with a server id to retrieve a specific server:
+curl http://localhost:8080/servers/123
+Output:
+[{ "id": "123", "name": "my centos", "language": "java", "framework": "django" }]
+
+
+4.	Use DELETE to remove a specific server:
+curl -X DELETE http://localhost:8080/servers/123
+Output:
+Empty response (HTTP 200 OK Status)
+
+
+5.	Use GET with name parameter to find servers with a specific name:
+curl http://localhost:8080/servers?name=my%20centos
+Output:
+[{ "id": "123", "name": "my centos", "language": "java", "framework": "django" }]
+
